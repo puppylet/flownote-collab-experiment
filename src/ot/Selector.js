@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Transform } from './Transformation';
 import { isArray } from './Utilitites';
 
@@ -24,6 +25,7 @@ const OperationTypes = {
 
 const Selector = {
   transform: (op1, op2, side) => {
+    console.log('_transform', op1, op2, side)
     const op = Selector._transform(op1, op2, side);
     return isArray(op) ? op : [op];
   },
@@ -34,6 +36,7 @@ const Selector = {
    * @param {string} side
    */
   _transform: (op1, op2, side) => {
+    console.log('_transform', op1, op2, side)
     if (op1.type === OperationTypes.INSERT_TEXT) {
       switch (op2.type) {
         case OperationTypes.INSERT_TEXT:
@@ -270,6 +273,8 @@ const Selector = {
         case OperationTypes.SET_SELECTION:
         case OperationTypes.SET_VALUE:
         default:
+          console.log('op 1', op1);
+          console.log('op2', op2);
           return op1;
         // throw new Error(`Unsupported operation type passed:  ${op1.type}, ${op2.type}`);
       }

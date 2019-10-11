@@ -1,3 +1,4 @@
+/* eslint-disable */
 var { Operation, PathUtils, Mark } = require('slate');
 
 const nodeTransformHelper = (op1, op2) => {
@@ -30,7 +31,7 @@ export default {
     decrement(path, n=1, index = path.size -1)
         decrease path by n at index, default last element
     increment(path, n=1, index=path.size -1)
-        increment path by n at index.   
+        increment path by n at index.
     getAncestors(path)
         eg: [1,2,3] returns [[1], [1,2], [1,2,3]]
     isAbove(path, target)
@@ -48,7 +49,7 @@ export default {
     isYounger(p, t)
         if true: path are equal up to last index, pLast < tLast
     lift(p)
-        returns [0:-1] up to parent 
+        returns [0:-1] up to parent
     drop(p)
         returns [1:] removes the first element
     max(a,b)
@@ -57,7 +58,7 @@ export default {
         min SIZE of a or b
     relate(a,b)
         get largest common path ie:
-        [1,2,3,6], [1,2,3,8] => [1,2,3] 
+        [1,2,3,6], [1,2,3,8] => [1,2,3]
     transform(path, operation)
         transforms path to adjust to be current
   }
@@ -108,6 +109,7 @@ const Transform = {
    * [insert_text, insert_text] transformation.
    */
   transformInsTextInsText: (op1, op2, side) => {
+    console.log('transformInsTextInsText');
     const pathCompare = PathUtils.compare(op1.get('path'), op2.get('path'));
     if (pathCompare === 0) {
       if (op1.get('offset') < op2.get('offset') || (op1.get('offset') === op2.get('offset') && side === 'left')) {
