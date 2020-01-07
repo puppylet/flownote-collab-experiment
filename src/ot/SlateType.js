@@ -2,9 +2,9 @@
 import { Selector } from './Selector';
 import { normalizeSnapShot, isArray } from './Utilitites';
 
-var { Value, Operation } = require('slate');
-var { PathUtils } = require('slate');
-var { isImmutable } = require('immutable');
+const { Value, Operation } = require('slate');
+const { PathUtils } = require('slate');
+const { isImmutable } = require('immutable');
 
 const slateType = {
   Value: Value,
@@ -16,9 +16,12 @@ const slateType = {
       console.log(init);
       console.log('called create in SlateType');
       console.log(JSON.parse(JSON.stringify(Value.create(init).toJSON())));
+      console.log('Test console log');
       return Value.create(init);
     },
     apply: function(snapshot, op) {
+      // console.log('Test apply', snapshot);
+      // console.log('Test apply', op);
       let value = Value.create(snapshot);
       op.forEach(o => {
         const operation = Operation.create(o);
@@ -28,11 +31,13 @@ const slateType = {
       return value;
     },
     transform: function(op1, op2, side) {
+      console.log('Test transform');
       op1 = op1.map(o => Operation.create(o));
       op2 = op2.map(o => Operation.create(o));
       return slateType.transformOpLists(op1, op2, side);
     },
     serialize: function(snapshot) {
+      console.log('Test serialize');
       if (isImmutable(snapshot)) {
         return normalizeSnapShot(snapshot.toJSON());
       } else {
@@ -59,6 +64,10 @@ const slateType = {
 };
 
 slateType.transformOpLists = function(op1, op2, side) {
+  console.log('transformOpLists');
+  console.log('op1', op1);
+  console.log('op2', op2);
+  console.log('side', side);
   let transformedOps = [];
   for (let i = 0; i < op1.length; i++) {
     let leftOp = op1[i];
